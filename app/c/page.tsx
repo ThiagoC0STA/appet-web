@@ -30,6 +30,16 @@ interface Cuidado {
   comprovante_url: string | null;
 }
 
+interface FichaEmergencia {
+  contato_nome: string | null;
+  contato_telefone: string | null;
+  veterinario: string | null;
+  veterinario_telefone: string | null;
+  alergias: string | null;
+  condicoes: string | null;
+  observacao: string | null;
+}
+
 interface DadosCarteira {
   pet: {
     nome: string;
@@ -41,6 +51,8 @@ interface DadosCarteira {
   };
   expira_em: string;
   escopo: string[];
+  /** Null quando o tutor não marcou o escopo `emergencia`. */
+  emergencia: FichaEmergencia | null;
   cuidados: Cuidado[];
   peso_atual: number | null;
 }
@@ -168,8 +180,10 @@ export default function Carteira() {
     );
   }
 
-  const { pet, cuidados, peso_atual, expira_em, escopo } = dados;
+  const { pet, cuidados, peso_atual, expira_em, escopo, emergencia } = dados;
   const especie = pet.especie === 'cao' ? 'Cão' : 'Gato';
+  // Ficha marcada mas em branco não vira seção vazia com título.
+  const temFicha = emergencia && Object.values(emergencia).some(Boolean);
 
   return (
     <main>
@@ -195,6 +209,42 @@ export default function Carteira() {
           </p>
         ) : null}
       </div>
+
+      {/* Vem antes do histórico: numa urgência é o que se lê primeiro. */}
+      {temFicha && emergencia ? (
+        <>
+          <h2>Em caso de emergência</h2>
+          <div className="cartao urgente">
+            {emergencia.alergias ? (
+              <p className="alerta">
+                <strong>Alergias:</strong> {emergencia.alergias}
+              </p>
+            ) : null}
+            {emergencia.condicoes ? (
+              <p className="alerta">
+                <strong>Condições e medicação:</strong> {emergencia.condicoes}
+              </p>
+            ) : null}
+            {emergencia.contato_nome || emergencia.contato_telefone ? (
+              <p className="aviso">
+                <strong>Contato:</strong>{' '}
+                {[emergencia.contato_nome, emergencia.contato_telefone]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </p>
+            ) : null}
+            {emergencia.veterinario || emergencia.veterinario_telefone ? (
+              <p className="aviso">
+                <strong>Veterinário de referência:</strong>{' '}
+                {[emergencia.veterinario, emergencia.veterinario_telefone]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </p>
+            ) : null}
+            {emergencia.observacao ? <p className="aviso">{emergencia.observacao}</p> : null}
+          </div>
+        </>
+      ) : null}
 
       {escopo.includes('cuidados') ? (
         <>

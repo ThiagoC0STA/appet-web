@@ -70,6 +70,29 @@ h2 {
   font-size: 14px;
 }
 
+/*
+ * A ficha de emergência é lida por alguém apressado, com o animal na
+ * frente. Ganha borda e destaque para não se perder entre os cartões.
+ */
+.cartao.urgente {
+  border-left: 4px solid var(--ac);
+}
+
+.cartao.urgente p {
+  margin: 0 0 10px;
+}
+
+.cartao.urgente p:last-child {
+  margin-bottom: 0;
+}
+
+/* Alergia e condição crônica mudam a conduta: cor de texto normal, não
+   de apoio, porque não são detalhe. */
+.alerta {
+  color: var(--tx);
+  font-size: 15px;
+}
+
 .botao {
   display: block;
   width: 100%;
