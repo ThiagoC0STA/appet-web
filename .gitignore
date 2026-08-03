@@ -1,0 +1,16 @@
+# Este arquivo existe porque `web/` é um repositório próprio, e
+# repositório aninhado não herda o .gitignore do de cima.
+
+node_modules/
+.next/
+out/
+next-env.d.ts
+
+# A chave de service role mora aqui. Ela ignora o RLS inteiro:
+# vazou, vazou tudo.
+.env.local
+.env*.local
+
+.vercel
+*.tsbuildinfo
+.DS_Store

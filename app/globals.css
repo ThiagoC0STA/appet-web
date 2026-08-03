@@ -1,0 +1,140 @@
+/*
+ * Cores do aplicativo, para o documento não parecer de outro produto.
+ * Nada de fonte externa: a CSP bloqueia terceiro, e uma fonte servida
+ * de fora levaria a URL da página junto no Referer.
+ */
+
+:root {
+  --bg: #f4e7d3;
+  --surf: #ffffff;
+  --tx: #2a2119;
+  --tx2: #7a6a58;
+  --bd: #e3d3ba;
+  --ac: #c0552e;
+  --ac-ink: #fff6ec;
+  --ok: #4a7c59;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+h1 {
+  font-size: 26px;
+  letter-spacing: -0.6px;
+  margin: 0 0 4px;
+}
+
+h2 {
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--tx2);
+  margin: 32px 0 12px;
+}
+
+.cartao {
+  background: var(--surf);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 2px 14px rgba(42, 33, 25, 0.07);
+}
+
+.aviso {
+  color: var(--tx2);
+  font-size: 14px;
+}
+
+.botao {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--ac);
+  color: var(--ac-ink);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.registro {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--bd);
+}
+
+.registro:last-child {
+  border-bottom: 0;
+}
+
+.registro .data {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 82px;
+  color: var(--tx2);
+}
+
+.registro .nome {
+  font-weight: 600;
+}
+
+.registro .detalhe {
+  font-size: 13px;
+  color: var(--tx2);
+}
+
+.selo {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ok);
+}
+
+.comprovante {
+  display: block;
+  margin-top: 8px;
+  max-width: 220px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--bd);
+}
+
+.rodape {
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--tx2);
+  text-align: center;
+}
