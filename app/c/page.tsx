@@ -49,7 +49,8 @@ interface DadosCarteira {
     nascimento_aproximado: boolean;
     microchip: string | null;
   };
-  expira_em: string;
+  /** Null no QR de coleira: link de emergência não expira (0011). */
+  expira_em: string | null;
   escopo: string[];
   /** Null quando o tutor não marcou o escopo `emergencia`. */
   emergencia: FichaEmergencia | null;
@@ -164,8 +165,8 @@ export default function Carteira() {
         <div className="cartao">
           <h1>Carteira de saúde</h1>
           <p className="aviso">
-            Um tutor compartilhou a carteira de vacinação do pet dele com você. O conteúdo só é
-            carregado quando você abre, e o link tem prazo para vencer.
+            Um tutor compartilhou a carteira de saúde do pet dele com você. O conteúdo só é
+            carregado quando você abre, e o tutor pode cancelar o acesso a qualquer momento.
           </p>
           <button
             className="botao"
@@ -287,8 +288,9 @@ export default function Carteira() {
       ) : null}
 
       <p className="rodape">
-        Este link deixa de funcionar em {dataLonga(expira_em)}, ou antes disso se o tutor
-        cancelar.
+        {expira_em
+          ? `Este link deixa de funcionar em ${dataLonga(expira_em)}, ou antes disso se o tutor cancelar.`
+          : 'Este link continua aberto até o tutor cancelar.'}
         <br />
         Registrado no AppPet. Confirme sempre com o veterinário.
       </p>

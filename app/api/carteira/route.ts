@@ -43,8 +43,11 @@ interface CarteiraDoBanco {
     nascimento_aproximado: boolean;
     microchip: string | null;
   };
-  expira_em: string;
+  /** Null no QR de coleira: link de emergência não expira (0011). */
+  expira_em: string | null;
   escopo: string[];
+  /** Null quando o escopo não inclui `emergencia`. */
+  emergencia: Record<string, string | null> | null;
   cuidados: CuidadoDoBanco[];
   peso_atual: number | null;
 }
